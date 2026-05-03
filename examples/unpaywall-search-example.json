@@ -1,0 +1,43 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.unpaywall.org/v2/search/?query=machine+learning+drug+discovery&email=you@example.com&is_oa=true"
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "results": [
+        {
+          "response": {
+            "doi": "10.1039/c9sc04426d",
+            "doi_url": "https://doi.org/10.1039/c9sc04426d",
+            "title": "Machine learning for drug discovery",
+            "genre": "journal-article",
+            "is_oa": true,
+            "oa_status": "gold",
+            "published_date": "2019-11-13",
+            "year": 2019,
+            "journal_name": "Chemical Science",
+            "publisher": "Royal Society of Chemistry (RSC)",
+            "best_oa_location": {
+              "host_type": "publisher",
+              "is_best": true,
+              "license": "cc-by",
+              "url_for_pdf": "https://pubs.rsc.org/en/content/articlepdf/2020/sc/c9sc04426d",
+              "url_for_landing_page": "https://doi.org/10.1039/c9sc04426d",
+              "version": "publishedVersion"
+            },
+            "data_standard": 2,
+            "has_repository_copy": true,
+            "is_paratext": false,
+            "journal_is_in_doaj": false,
+            "journal_is_oa": false
+          },
+          "score": 67.2,
+          "snippet": "<b>Machine</b> <b>learning</b> for <b>drug</b> <b>discovery</b>"
+        }
+      ],
+      "elapsed_seconds": 0.038
+    }
+  }
+}

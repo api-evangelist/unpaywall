@@ -1,41 +1,83 @@
-# Unpaywall (unpaywall)
-The REST API gives anyone free, programmatic access to the Unpaywall database.If youre using the API, we recommend you subscribe to the mailing list in order to stay up-to-date when there are changes or new features. 
+# Unpaywall
 
-**URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/unpaywall/refs/heads/main/apis.yml)
+The Unpaywall REST API gives anyone free, programmatic access to the Unpaywall database of open access scholarly articles. The database covers over 120 million articles with Crossref DOIs and provides free, legal full-text links where available — with metadata on OA status, host type, version, and license.
 
-## Scope
+**Website:** [unpaywall.org](https://unpaywall.org)
+**API Docs:** [unpaywall.org/products/api](https://unpaywall.org/products/api)
+**Data Format:** [unpaywall.org/data-format](https://unpaywall.org/data-format)
 
-- **Type:** Index 
-- **Position:** Consuming 
-- **Access:** 3rd-Party 
+---
 
-## Tags:
+## API
 
- - API
+### Unpaywall API (v2.0.0)
 
-## Timestamps
+Free REST API for open access status lookups by DOI and title search.
 
-- **Created:** 2025-02-06 
-- **Modified:** 2026-03-16 
+- Base URL: `https://api.unpaywall.org/v2`
+- Auth: `?email=you@example.com` (query parameter, no API key)
+- Rate limit: 100,000 calls/day
 
-## APIs
+**Endpoints:**
+| Method | Path | Description |
+|---|---|---|
+| GET | `/{doi}?email={email}` | Get Open Access Status by DOI |
+| GET | `/search/?query={q}&email={email}` | Search Articles by Title |
 
-### Unpaywall
-The REST API gives anyone free, programmatic access to the Unpaywall database.If youre using the API, we recommend you subscribe to the mailing list in order to stay up-to-date when there are changes or new features. 
+- [OpenAPI Specification](openapi/unpaywall-openapi.yml)
 
-**Human URL:** [ https://unpaywall.org/products/api]( https://unpaywall.org/products/api)
+---
 
+## Artifacts
 
-#### Tags:
+### OpenAPI
+| File | Description |
+|---|---|
+| [unpaywall-openapi.yml](openapi/unpaywall-openapi.yml) | Full Unpaywall API OpenAPI 3.0.3 specification |
 
- - API
+### Spectral Rules
+| File | Description |
+|---|---|
+| [unpaywall-rules.yml](rules/unpaywall-rules.yml) | Spectral ruleset for Unpaywall API conventions |
 
-#### Properties
+### Capabilities (Naftiko)
+| File | Description |
+|---|---|
+| [shared/unpaywall.yaml](capabilities/shared/unpaywall.yaml) | Shared Unpaywall API consumed definition |
+| [open-access-discovery.yaml](capabilities/open-access-discovery.yaml) | Open access discovery workflow (2 tools) |
 
-- [Documentation]( https://unpaywall.org/products/api)
+### JSON Schema
+| File | Description |
+|---|---|
+| [unpaywall-article-schema.json](json-schema/unpaywall-article-schema.json) | Unpaywall article object schema |
 
-## Maintainers
+### JSON Structure
+| File | Description |
+|---|---|
+| [unpaywall-article-structure.json](json-structure/unpaywall-article-structure.json) | Article field documentation |
 
-**FN:** Kin Lane
+### JSON-LD Context
+| File | Description |
+|---|---|
+| [unpaywall-context.jsonld](json-ld/unpaywall-context.jsonld) | Linked data context mapping Unpaywall concepts to schema.org, bibo, dcterms |
 
-**Email:** kin@apievangelist.com
+### Examples
+| File | Description |
+|---|---|
+| [unpaywall-get-doi-example.json](examples/unpaywall-get-doi-example.json) | DOI lookup request/response |
+| [unpaywall-search-example.json](examples/unpaywall-search-example.json) | Title search request/response |
+
+### Vocabulary
+| File | Description |
+|---|---|
+| [unpaywall-vocabulary.yml](vocabulary/unpaywall-vocabulary.yml) | Domain vocabulary for open access and scholarly publishing concepts |
+
+---
+
+## APIs Index
+
+- [apis.yml](apis.yml)
+
+---
+
+*Maintained by [API Evangelist](https://apievangelist.com)*

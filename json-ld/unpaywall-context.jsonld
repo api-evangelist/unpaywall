@@ -1,0 +1,169 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "bibo": "http://purl.org/ontology/bibo/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "unpaywall": "https://unpaywall.org/ontology#",
+    "fabio": "http://purl.org/spar/fabio/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "ScholarlyArticle": "schema:ScholarlyArticle",
+    "Journal": "bibo:Journal",
+    "OALocation": "unpaywall:OALocation",
+    "Author": "schema:Person",
+
+    "doi": {
+      "@id": "bibo:doi",
+      "@type": "xsd:string"
+    },
+    "doi_url": {
+      "@id": "schema:url",
+      "@type": "xsd:anyURI"
+    },
+    "title": "dcterms:title",
+    "genre": {
+      "@id": "dcterms:type",
+      "@type": "xsd:string"
+    },
+    "is_paratext": {
+      "@id": "unpaywall:isParatext",
+      "@type": "xsd:boolean"
+    },
+    "published_date": {
+      "@id": "dcterms:date",
+      "@type": "xsd:string"
+    },
+    "year": {
+      "@id": "schema:datePublished",
+      "@type": "xsd:integer"
+    },
+    "publisher": "dcterms:publisher",
+    "journal_name": {
+      "@id": "schema:isPartOf",
+      "@type": "xsd:string"
+    },
+    "journal_issns": {
+      "@id": "bibo:issn",
+      "@type": "xsd:string"
+    },
+    "journal_issn_l": {
+      "@id": "bibo:issn",
+      "@type": "xsd:string"
+    },
+    "journal_is_oa": {
+      "@id": "unpaywall:journalIsOA",
+      "@type": "xsd:boolean"
+    },
+    "journal_is_in_doaj": {
+      "@id": "unpaywall:inDOAJ",
+      "@type": "xsd:boolean"
+    },
+    "is_oa": {
+      "@id": "unpaywall:isOpenAccess",
+      "@type": "xsd:boolean"
+    },
+    "oa_status": {
+      "@id": "unpaywall:oaStatus",
+      "@type": "xsd:string"
+    },
+    "has_repository_copy": {
+      "@id": "unpaywall:hasRepositoryCopy",
+      "@type": "xsd:boolean"
+    },
+    "best_oa_location": {
+      "@id": "unpaywall:bestOALocation",
+      "@type": "unpaywall:OALocation"
+    },
+    "first_oa_location": {
+      "@id": "unpaywall:firstOALocation",
+      "@type": "unpaywall:OALocation"
+    },
+    "oa_locations": {
+      "@id": "unpaywall:oaLocations",
+      "@container": "@set"
+    },
+    "oa_locations_embargoed": {
+      "@id": "unpaywall:oaLocationsEmbargoed",
+      "@container": "@set"
+    },
+    "url": {
+      "@id": "schema:url",
+      "@type": "xsd:anyURI"
+    },
+    "url_for_pdf": {
+      "@id": "fabio:hasManifestation",
+      "@type": "xsd:anyURI"
+    },
+    "url_for_landing_page": {
+      "@id": "schema:mainEntityOfPage",
+      "@type": "xsd:anyURI"
+    },
+    "host_type": {
+      "@id": "unpaywall:hostType",
+      "@type": "xsd:string"
+    },
+    "version": {
+      "@id": "unpaywall:version",
+      "@type": "xsd:string"
+    },
+    "license": {
+      "@id": "dcterms:license",
+      "@type": "xsd:string"
+    },
+    "oa_date": {
+      "@id": "unpaywall:oaDate",
+      "@type": "xsd:string"
+    },
+    "is_best": {
+      "@id": "unpaywall:isBest",
+      "@type": "xsd:boolean"
+    },
+    "endpoint_id": {
+      "@id": "unpaywall:endpointId",
+      "@type": "xsd:string"
+    },
+    "pmh_id": {
+      "@id": "unpaywall:pmhId",
+      "@type": "xsd:string"
+    },
+    "repository_institution": {
+      "@id": "schema:sourceOrganization",
+      "@type": "xsd:string"
+    },
+    "evidence": {
+      "@id": "unpaywall:evidence",
+      "@type": "xsd:string"
+    },
+    "data_standard": {
+      "@id": "unpaywall:dataStandard",
+      "@type": "xsd:integer"
+    },
+    "updated": {
+      "@id": "dcterms:modified",
+      "@type": "xsd:dateTime"
+    },
+    "z_authors": {
+      "@id": "dcterms:creator",
+      "@container": "@set"
+    },
+    "given": "schema:givenName",
+    "family": "schema:familyName",
+    "ORCID": {
+      "@id": "schema:identifier",
+      "@type": "xsd:anyURI"
+    },
+    "affiliation": {
+      "@id": "schema:affiliation",
+      "@container": "@set"
+    },
+    "score": {
+      "@id": "schema:ratingValue",
+      "@type": "xsd:float"
+    },
+    "snippet": {
+      "@id": "schema:description",
+      "@type": "xsd:string"
+    }
+  }
+}

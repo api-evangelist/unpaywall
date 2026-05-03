@@ -1,0 +1,76 @@
+extends: [[spectral:oas, all]]
+
+rules:
+
+  # All paths must be versioned with /v2/
+  unpaywall-path-versioning:
+    description: All Unpaywall API paths must start with /v2/
+    message: "Path should include version prefix"
+    severity: info
+    given: "$.servers[*].url"
+    then:
+      function: pattern
+      functionOptions:
+        match: "/v2$"
+
+  # Email parameter required for all operations
+  unpaywall-email-required:
+    description: The email query parameter is required for all Unpaywall API calls
+    message: "Operation must include required email query parameter"
+    severity: error
+    given: "$.paths[*][get]"
+    then:
+      function: schema
+      field: parameters
+      functionOptions:
+        schema:
+          type: array
+          contains:
+            type: object
+            properties:
+              name:
+                const: email
+              in:
+                const: query
+              required:
+                const: true
+
+  # Summaries must be Title Case
+  unpaywall-title-case-summary:
+    description: Operation summaries must use Title Case
+    message: "Summary '{{value}}' should use Title Case"
+    severity: warn
+    given: "$.paths[*][*].summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z]"
+
+  # Operations must have operationIds
+  unpaywall-operation-id:
+    description: All operations must have an operationId
+    message: "Operation missing operationId"
+    severity: error
+    given: "$.paths[*][*]"
+    then:
+      field: operationId
+      function: truthy
+
+  # 404 for DOI lookup endpoint
+  unpaywall-doi-not-found:
+    description: DOI lookup must define 404 response
+    message: "DOI lookup endpoint should define 404 response"
+    severity: warn
+    given: "$.paths[/{doi}][get]"
+    then:
+      field: "responses.404"
+      function: truthy
+
+  # API uses GET-only patterns
+  unpaywall-get-only:
+    description: Unpaywall API is read-only and uses GET requests only
+    message: "Non-GET method used — Unpaywall API is read-only"
+    severity: warn
+    given: "$.paths[*][post,put,patch,delete]"
+    then:
+      function: falsy

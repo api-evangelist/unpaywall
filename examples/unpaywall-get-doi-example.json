@@ -1,0 +1,84 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.unpaywall.org/v2/10.1038/nature12373?email=you@example.com"
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "best_oa_location": {
+        "endpoint_id": null,
+        "evidence": "open (via free pdf)",
+        "host_type": "publisher",
+        "is_best": true,
+        "license": null,
+        "oa_date": "2013-07-30",
+        "pmh_id": null,
+        "repository_institution": null,
+        "updated": "2022-02-12T00:28:39.645349",
+        "url": "https://www.nature.com/articles/nature12373.pdf",
+        "url_for_landing_page": "https://doi.org/10.1038/nature12373",
+        "url_for_pdf": "https://www.nature.com/articles/nature12373.pdf",
+        "version": "publishedVersion"
+      },
+      "data_standard": 2,
+      "doi": "10.1038/nature12373",
+      "doi_url": "https://doi.org/10.1038/nature12373",
+      "genre": "journal-article",
+      "has_repository_copy": true,
+      "is_oa": true,
+      "is_paratext": false,
+      "journal_is_in_doaj": false,
+      "journal_is_oa": false,
+      "journal_issn_l": "0028-0836",
+      "journal_issns": "0028-0836,1476-4687",
+      "journal_name": "Nature",
+      "oa_locations": [
+        {
+          "endpoint_id": null,
+          "evidence": "open (via free pdf)",
+          "host_type": "publisher",
+          "is_best": true,
+          "license": null,
+          "oa_date": "2013-07-30",
+          "pmh_id": null,
+          "repository_institution": null,
+          "updated": "2022-02-12T00:28:39.645349",
+          "url": "https://www.nature.com/articles/nature12373.pdf",
+          "url_for_landing_page": "https://doi.org/10.1038/nature12373",
+          "url_for_pdf": "https://www.nature.com/articles/nature12373.pdf",
+          "version": "publishedVersion"
+        },
+        {
+          "endpoint_id": "ca8f8d56758a80a4f86",
+          "evidence": "oa repository (via OAI-PMH dx.doi.org link)",
+          "host_type": "repository",
+          "is_best": false,
+          "license": null,
+          "oa_date": "2013-07-30",
+          "pmh_id": "oai:arXiv.org:1304.1068",
+          "repository_institution": "Cornell University",
+          "updated": "2022-06-15T10:08:11.024887",
+          "url": "https://arxiv.org/pdf/1304.1068",
+          "url_for_landing_page": "http://arxiv.org/abs/1304.1068",
+          "url_for_pdf": "https://arxiv.org/pdf/1304.1068",
+          "version": "submittedVersion"
+        }
+      ],
+      "oa_locations_embargoed": [],
+      "oa_status": "bronze",
+      "published_date": "2013-07-30",
+      "publisher": "Springer Nature",
+      "title": "Measurement of the Higgs boson mass from the H→γγ and H→ZZ*→4ℓ channels",
+      "updated": "2022-02-12T00:28:39.645349",
+      "year": 2013,
+      "z_authors": [
+        {
+          "family": "Aad",
+          "given": "G.",
+          "affiliation": []
+        }
+      ]
+    }
+  }
+}

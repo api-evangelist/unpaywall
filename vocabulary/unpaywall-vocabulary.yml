@@ -1,0 +1,208 @@
+vocabulary:
+  provider: Unpaywall
+  description: >-
+    Domain vocabulary for the Unpaywall open access scholarly article database and API.
+    Covers open access concepts, article types, OA location metadata, licensing,
+    and bibliographic identifiers used in the scholarly communications ecosystem.
+  version: '2026-05-03'
+  tags:
+    - Open Access
+    - Scholarly Articles
+    - Academic
+    - Research
+    - Libraries
+
+  terms:
+
+    - term: Open Access (OA)
+      definition: >-
+        The practice of making scholarly research freely available to read, download,
+        and reuse without paywalls or subscription requirements. Unpaywall's is_oa
+        field indicates whether a legal, free copy of an article exists.
+      tags:
+        - Core Concept
+
+    - term: DOI (Digital Object Identifier)
+      definition: >-
+        A persistent identifier assigned to scholarly articles, datasets, and other
+        research outputs by Crossref. Unpaywall uses DOIs as the primary lookup key.
+        Format: 10.{registrant}/{suffix}, e.g., 10.1038/nature12373.
+      tags:
+        - Identifiers
+
+    - term: OA Status
+      definition: >-
+        A color classification of the type of open access available for an article.
+        Unpaywall defines: gold (fully OA journal), hybrid (OA article in subscription
+        journal), bronze (freely readable but no explicit license), green (repository
+        copy), and closed (no free version available).
+      tags:
+        - Classification
+
+    - term: Gold OA
+      definition: >-
+        Open access achieved by publishing in a fully open access journal (one where
+        all articles are freely available). Journals are typically listed in DOAJ.
+      tags:
+        - OA Status
+
+    - term: Hybrid OA
+      definition: >-
+        Open access for an individual article published in a subscription-based journal.
+        The author (or funder) pays an article processing charge (APC) to make the
+        specific article open access while the journal remains subscription-based.
+      tags:
+        - OA Status
+
+    - term: Bronze OA
+      definition: >-
+        An article that is freely readable on the publisher's website but without
+        an explicit open license (making reuse rights unclear). Often the result of
+        publisher-specific sharing policies rather than true open access.
+      tags:
+        - OA Status
+
+    - term: Green OA
+      definition: >-
+        Open access achieved by depositing a version of an article in a repository
+        (institutional repository, subject repository like arXiv/PubMed Central).
+        May be the accepted manuscript (post-peer-review) or preprint.
+      tags:
+        - OA Status
+
+    - term: OA Location
+      definition: >-
+        A specific URL where a free, legal version of an article can be accessed.
+        Each location has host_type (publisher or repository), version (published,
+        accepted, submitted), and optional license information.
+      tags:
+        - Data Model
+
+    - term: Best OA Location
+      definition: >-
+        The highest-quality OA location for an article as determined by Unpaywall.
+        Priority order: publisher version > accepted manuscript > submitted preprint.
+        Publisher versions are preferred over repository copies of the same quality.
+      tags:
+        - Data Model
+
+    - term: Host Type
+      definition: >-
+        Where an OA copy is hosted. "publisher" means the version is on the publisher's
+        own website. "repository" means it is in an institutional or subject repository
+        (arXiv, PubMed Central, Zenodo, institutional repository, etc.).
+      tags:
+        - Data Model
+
+    - term: Version
+      definition: >-
+        The stage of a manuscript: publishedVersion (final typeset version),
+        acceptedVersion (post-peer-review, pre-typesetting; often called "author's
+        accepted manuscript" or AAM), submittedVersion (pre-peer-review preprint).
+      tags:
+        - Data Model
+
+    - term: Accepted Version
+      definition: >-
+        The post-peer-review, pre-typesetting version of a manuscript deposited in
+        a repository. Often allowed under publisher green OA policies after an embargo
+        period. Also called "author's accepted manuscript" (AAM) or "postprint."
+      tags:
+        - Versions
+
+    - term: Submitted Version
+      definition: >-
+        The pre-peer-review version of a manuscript (preprint), often deposited on
+        arXiv, bioRxiv, SSRN, or other preprint servers. May differ significantly
+        from the final published version.
+      tags:
+        - Versions
+
+    - term: Published Version
+      definition: >-
+        The final, typeset version of record as published by the journal. The highest
+        quality version. Available as OA when the article is gold, hybrid, or bronze.
+      tags:
+        - Versions
+
+    - term: Repository
+      definition: >-
+        An archive or server where researchers deposit copies of their articles.
+        Common repositories include arXiv (physics/math/CS), PubMed Central (biomedicine),
+        SSRN (social sciences), Zenodo (multi-disciplinary), and institutional repositories.
+      tags:
+        - Infrastructure
+
+    - term: DOAJ (Directory of Open Access Journals)
+      definition: >-
+        A community-curated index of peer-reviewed, fully open access journals.
+        Unpaywall's journal_is_in_doaj field indicates whether a journal is listed
+        in DOAJ, which is a strong quality signal for gold OA journals.
+      tags:
+        - Standards
+        - Registries
+
+    - term: ISSN (International Standard Serial Number)
+      definition: >-
+        An 8-digit code identifying a serial publication (journal). Unpaywall includes
+        journal_issns (all ISSNs for a journal) and journal_issn_l (the linking ISSN,
+        which uniquely identifies a journal across its print and electronic forms).
+      tags:
+        - Identifiers
+
+    - term: ISSN-L (Linking ISSN)
+      definition: >-
+        The canonical ISSN assigned to group all ISSNs for a journal (print, online,
+        CD-ROM) into a single identifier. Used by Unpaywall as journal_issn_l.
+      tags:
+        - Identifiers
+
+    - term: Paratext
+      definition: >-
+        Metadata records about journal issues, conference proceedings, editorials, or
+        other non-research content. Unpaywall marks these with is_paratext=true.
+        Applications typically filter out paratext when looking for research articles.
+      tags:
+        - Data Quality
+
+    - term: Data Standard
+      definition: >-
+        Unpaywall's version indicator for how completely an article has been processed.
+        data_standard=2 means the article has been fully processed with comprehensive
+        OA location discovery. Filter to data_standard=2 for the most complete records.
+      tags:
+        - Data Quality
+
+    - term: OAI-PMH (Open Archives Initiative Protocol for Metadata Harvesting)
+      definition: >-
+        The protocol used by repositories to expose their metadata for harvesting.
+        Unpaywall uses OAI-PMH to discover repository copies. The pmh_id field
+        stores the OAI-PMH record identifier, and endpoint_id identifies the repository.
+      tags:
+        - Protocols
+        - Infrastructure
+
+    - term: Embargo
+      definition: >-
+        A period after publication during which an OA copy is not yet available,
+        even if it will eventually become open. Embargoed locations appear in
+        Unpaywall's oa_locations_embargoed field.
+      tags:
+        - Policy
+
+    - term: Creative Commons License
+      definition: >-
+        A standardized open license allowing reuse of content. Common values in
+        Unpaywall: cc-by (attribution), cc-by-sa (share-alike), cc-by-nc (non-commercial),
+        cc-by-nd (no derivatives), cc0 (public domain). The license field may be null
+        for bronze OA (free to read but no explicit license).
+      tags:
+        - Licensing
+
+    - term: Article Processing Charge (APC)
+      definition: >-
+        A fee paid by authors (or their institutions/funders) to make an article
+        open access in a gold or hybrid journal. Not tracked directly by Unpaywall
+        but relevant context for understanding gold/hybrid OA status.
+      tags:
+        - Publishing

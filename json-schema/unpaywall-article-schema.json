@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://unpaywall.org/schemas/article",
+  "title": "Unpaywall Article Object",
+  "description": "The Unpaywall object for a scholarly article, including open access status, all OA locations, journal metadata, and bibliographic information.",
+  "type": "object",
+  "required": ["doi", "is_oa", "data_standard"],
+  "properties": {
+    "doi": {
+      "type": "string",
+      "description": "The DOI of the article (lowercased, without https://doi.org/ prefix)",
+      "pattern": "^10\\.",
+      "example": "10.1038/nature12373"
+    },
+    "doi_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Canonical DOI URL (https://doi.org/{doi})",
+      "example": "https://doi.org/10.1038/nature12373"
+    },
+    "title": {"type": ["string", "null"], "description": "Article title"},
+    "genre": {
+      "type": ["string", "null"],
+      "description": "Article type from Crossref",
+      "enum": ["journal-article", "book-chapter", "conference-paper", "proceedings-article", "dataset", "report", "preprint", "dissertation", "monograph", null]
+    },
+    "is_paratext": {
+      "type": "boolean",
+      "description": "True if this is a journal issue/conference proceeding metadata record rather than a research article",
+      "default": false
+    },
+    "published_date": {"type": ["string", "null"], "description": "Publication date (YYYY-MM-DD or partial)"},
+    "year": {"type": ["integer", "null"], "description": "Publication year"},
+    "journal_name": {"type": ["string", "null"], "description": "Journal name"},
+    "journal_issns": {"type": ["string", "null"], "description": "Comma-separated ISSNs"},
+    "journal_issn_l": {"type": ["string", "null"], "description": "Linking ISSN"},
+    "journal_is_oa": {"type": "boolean", "description": "Whether the journal is fully open access"},
+    "journal_is_in_doaj": {"type": "boolean", "description": "Whether the journal is in DOAJ"},
+    "publisher": {"type": ["string", "null"], "description": "Publisher name from Crossref"},
+    "is_oa": {
+      "type": "boolean",
+      "description": "Whether a free, legal full-text version is available. The primary OA indicator."
+    },
+    "oa_status": {
+      "type": ["string", "null"],
+      "description": "OA color: gold (fully OA journal), hybrid (OA in subscription journal), bronze (free but no license), green (repository copy), closed",
+      "enum": ["gold", "hybrid", "bronze", "green", "closed", null]
+    },
+    "has_repository_copy": {"type": "boolean", "description": "Whether a repository copy exists"},
+    "best_oa_location": {
+      "$ref": "#/$defs/OALocation",
+      "description": "The highest-quality OA location"
+    },
+    "first_oa_location": {
+      "$ref": "#/$defs/OALocation",
+      "description": "The chronologically first OA location"
+    },
+    "oa_locations": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/OALocation"},
+      "description": "All OA locations found"
+    },
+    "oa_locations_embargoed": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/OALocation"},
+      "description": "OA locations currently under embargo"
+    },
+    "data_standard": {
+      "type": "integer",
+      "description": "Data processing version (2 = current, most complete)",
+      "enum": [1, 2]
+    },
+    "updated": {"type": ["string", "null"], "description": "Last updated timestamp"},
+    "z_authors": {
+      "type": ["array", "null"],
+      "description": "Author metadata from Crossref",
+      "items": {
+        "type": "object",
+        "properties": {
+          "given": {"type": "string"},
+          "family": {"type": "string"},
+          "ORCID": {"type": "string"},
+          "affiliation": {
+            "type": "array",
+            "items": {"type": "object", "properties": {"name": {"type": "string"}}}
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "OALocation": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "url": {"type": ["string", "null"], "format": "uri"},
+            "url_for_pdf": {"type": ["string", "null"], "format": "uri"},
+            "url_for_landing_page": {"type": ["string", "null"], "format": "uri"},
+            "host_type": {"type": ["string", "null"], "enum": ["publisher", "repository", null]},
+            "version": {"type": ["string", "null"], "enum": ["publishedVersion", "acceptedVersion", "submittedVersion", null]},
+            "license": {"type": ["string", "null"]},
+            "oa_date": {"type": ["string", "null"]},
+            "is_best": {"type": "boolean"},
+            "endpoint_id": {"type": ["string", "null"]},
+            "pmh_id": {"type": ["string", "null"]},
+            "repository_institution": {"type": ["string", "null"]},
+            "evidence": {"type": ["string", "null"]},
+            "updated": {"type": ["string", "null"]}
+          }
+        },
+        {"type": "null"}
+      ]
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "title": "Unpaywall Article Structure",
+  "description": "Structural documentation for Unpaywall article objects",
+  "entity": "UnpaywallObject",
+  "fields": [
+    {"name": "doi", "type": "string", "required": true, "description": "Article DOI (10.xxxx/xxx format)"},
+    {"name": "doi_url", "type": "string", "required": false, "description": "https://doi.org/{doi}"},
+    {"name": "title", "type": "string|null", "required": false, "description": "Article title"},
+    {"name": "genre", "type": "string|null", "required": false, "description": "Article type (journal-article, book-chapter, etc.)"},
+    {"name": "is_paratext", "type": "boolean", "required": false, "default": false, "description": "Is this a journal issue or editorial (not research)?"},
+    {"name": "published_date", "type": "string|null", "required": false, "description": "Publication date (ISO 8601)"},
+    {"name": "year", "type": "integer|null", "required": false, "description": "Publication year"},
+    {"name": "journal_name", "type": "string|null", "required": false, "description": "Journal name"},
+    {"name": "journal_issns", "type": "string|null", "required": false, "description": "Comma-separated ISSNs"},
+    {"name": "journal_issn_l", "type": "string|null", "required": false, "description": "Linking ISSN"},
+    {"name": "journal_is_oa", "type": "boolean", "required": false, "description": "Is the journal fully open access?"},
+    {"name": "journal_is_in_doaj", "type": "boolean", "required": false, "description": "Is the journal in DOAJ?"},
+    {"name": "publisher", "type": "string|null", "required": false, "description": "Publisher name"},
+    {"name": "is_oa", "type": "boolean", "required": true, "description": "Primary OA indicator — is there a free legal copy?"},
+    {"name": "oa_status", "type": "enum|null", "required": false, "description": "OA color: gold|hybrid|bronze|green|closed"},
+    {"name": "has_repository_copy", "type": "boolean", "required": false, "description": "Green OA flag"},
+    {"name": "data_standard", "type": "integer", "required": true, "description": "Data version (2=current)"},
+    {"name": "updated", "type": "string|null", "required": false, "description": "Last updated timestamp"},
+    {
+      "name": "best_oa_location",
+      "type": "object|null",
+      "required": false,
+      "description": "The best OA location",
+      "fields": [
+        {"name": "url", "type": "string|null", "description": "Best available URL (PDF or landing)"},
+        {"name": "url_for_pdf", "type": "string|null", "description": "Direct PDF URL if available"},
+        {"name": "url_for_landing_page", "type": "string|null", "description": "Landing page URL"},
+        {"name": "host_type", "type": "enum|null", "description": "publisher|repository"},
+        {"name": "version", "type": "enum|null", "description": "publishedVersion|acceptedVersion|submittedVersion"},
+        {"name": "license", "type": "string|null", "description": "Open license (cc-by, cc-by-nc, etc.)"},
+        {"name": "oa_date", "type": "string|null", "description": "Date became open access"},
+        {"name": "is_best", "type": "boolean", "description": "Is this the best location?"},
+        {"name": "endpoint_id", "type": "string|null", "description": "OAI-PMH endpoint ID"},
+        {"name": "pmh_id", "type": "string|null", "description": "OAI-PMH record ID"},
+        {"name": "repository_institution", "type": "string|null", "description": "Repository institution name"}
+      ]
+    },
+    {
+      "name": "oa_locations",
+      "type": "array<OALocation>",
+      "required": false,
+      "description": "All OA locations found"
+    },
+    {
+      "name": "oa_locations_embargoed",
+      "type": "array<OALocation>",
+      "required": false,
+      "description": "Embargoed OA locations"
+    },
+    {
+      "name": "z_authors",
+      "type": "array<object>|null",
+      "required": false,
+      "description": "Authors from Crossref",
+      "fields": [
+        {"name": "given", "type": "string", "description": "Given name"},
+        {"name": "family", "type": "string", "description": "Family name"},
+        {"name": "ORCID", "type": "string", "description": "ORCID identifier"}
+      ]
+    }
+  ]
+}
