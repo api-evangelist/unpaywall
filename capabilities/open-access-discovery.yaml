@@ -1,104 +1,151 @@
-naftiko: "1.0.0-alpha1"
-
+naftiko: 1.0.0-alpha2
 info:
   label: Unpaywall Open Access Discovery
-  description: >-
-    Workflow capability for discovering free, legal full-text versions of scholarly
-    articles using Unpaywall. Enables researchers, librarians, and developers to
-    check open access status by DOI and search for articles by title. Returns
-    full-text URLs, license information, and repository/publisher source details.
+  description: Workflow capability for discovering free, legal full-text versions of scholarly articles using Unpaywall. Enables
+    researchers, librarians, and developers to check open access status by DOI and search for articles by title. Returns full-text
+    URLs, license information, and repository/publisher source details.
   tags:
-    - Unpaywall
-    - Open Access
-    - Research
-    - Scholarly Articles
-    - Academic
-  created: "2026-05-03"
-  modified: "2026-05-03"
-
+  - Unpaywall
+  - Open Access
+  - Research
+  - Scholarly Articles
+  - Academic
+  created: '2026-05-03'
+  modified: '2026-05-06'
 binds:
-  - namespace: env
-    keys:
-      UNPAYWALL_EMAIL: UNPAYWALL_EMAIL
-
+- namespace: env
+  keys:
+    UNPAYWALL_EMAIL: UNPAYWALL_EMAIL
 capability:
   consumes:
-    - import: unpaywall
-      location: ./shared/unpaywall.yaml
-
+  - type: http
+    namespace: unpaywall
+    baseUri: https://api.unpaywall.org/v2
+    description: Unpaywall API for open access scholarly article discovery
+    resources:
+    - name: doi-lookup
+      path: /
+      description: Look up open access status by DOI
+      operations:
+      - name: get-by-doi
+        method: GET
+        description: Get Open Access Status by DOI
+        inputParameters:
+        - name: doi
+          in: path
+          type: string
+          required: true
+          description: Article DOI (e.g., 10.1038/nature12373)
+        - name: email
+          in: query
+          type: string
+          required: true
+          description: Your email address (required for identification)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: search
+      path: /search/
+      description: Search articles by title
+      operations:
+      - name: search-by-title
+        method: GET
+        description: Search Articles by Title
+        inputParameters:
+        - name: query
+          in: query
+          type: string
+          required: true
+          description: Title search query
+        - name: email
+          in: query
+          type: string
+          required: true
+          description: Your email address (required)
+        - name: is_oa
+          in: query
+          type: boolean
+          required: false
+          description: Filter to open access only
+        - name: page
+          in: query
+          type: integer
+          required: false
+          description: Page number (50 results per page)
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
   exposes:
-    - type: rest
-      port: 8080
-      namespace: unpaywall-discovery-api
-      description: Unified REST API for open access article discovery via Unpaywall.
-      resources:
-        - path: /v1/articles/{doi}
-          name: article-by-doi
-          description: Open access lookup by DOI
-          operations:
-            - method: GET
-              name: get-oa-status
-              description: Get open access status and full-text links for an article
-              call: "unpaywall.get-by-doi"
-              with:
-                doi: "rest.doi"
-                email: "rest.email"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/search
-          name: article-search
-          description: Title-based article search
-          operations:
-            - method: GET
-              name: search-articles
-              description: Search articles by title with optional OA filter
-              call: "unpaywall.search-by-title"
-              with:
-                query: "rest.query"
-                email: "rest.email"
-                is_oa: "rest.is_oa"
-                page: "rest.page"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-    - type: mcp
-      port: 9090
-      namespace: unpaywall-discovery-mcp
-      transport: http
-      description: MCP server for AI-assisted open access scholarly article discovery.
-      tools:
-        - name: check-open-access
-          description: >-
-            Check if a scholarly article (identified by DOI) has a free, legal
-            open access version and return all available full-text links with
-            license, host type (publisher/repository), and version information.
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "unpaywall.get-by-doi"
-          with:
-            doi: "tools.doi"
-            email: "tools.email"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: search-open-access-articles
-          description: >-
-            Search the Unpaywall database by article title to find scholarly articles
-            and their open access status. Optionally filter to only open access results.
-            Returns up to 50 results per page with relevance scores.
-          hints:
-            readOnly: true
-            openWorld: true
-          call: "unpaywall.search-by-title"
-          with:
-            query: "tools.query"
-            email: "tools.email"
-            is_oa: "tools.is_oa"
-            page: "tools.page"
-          outputParameters:
-            - type: object
-              mapping: "$."
+  - type: rest
+    port: 8080
+    namespace: unpaywall-discovery-api
+    description: Unified REST API for open access article discovery via Unpaywall.
+    resources:
+    - path: /v1/articles/{doi}
+      name: article-by-doi
+      description: Open access lookup by DOI
+      operations:
+      - method: GET
+        name: get-oa-status
+        description: Get open access status and full-text links for an article
+        call: unpaywall.get-by-doi
+        with:
+          doi: rest.doi
+          email: rest.email
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/search
+      name: article-search
+      description: Title-based article search
+      operations:
+      - method: GET
+        name: search-articles
+        description: Search articles by title with optional OA filter
+        call: unpaywall.search-by-title
+        with:
+          query: rest.query
+          email: rest.email
+          is_oa: rest.is_oa
+          page: rest.page
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: unpaywall-discovery-mcp
+    transport: http
+    description: MCP server for AI-assisted open access scholarly article discovery.
+    tools:
+    - name: check-open-access
+      description: Check if a scholarly article (identified by DOI) has a free, legal open access version and return all available
+        full-text links with license, host type (publisher/repository), and version information.
+      hints:
+        readOnly: true
+        openWorld: true
+      call: unpaywall.get-by-doi
+      with:
+        doi: tools.doi
+        email: tools.email
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: search-open-access-articles
+      description: Search the Unpaywall database by article title to find scholarly articles and their open access status.
+        Optionally filter to only open access results. Returns up to 50 results per page with relevance scores.
+      hints:
+        readOnly: true
+        openWorld: true
+      call: unpaywall.search-by-title
+      with:
+        query: tools.query
+        email: tools.email
+        is_oa: tools.is_oa
+        page: tools.page
+      outputParameters:
+      - type: object
+        mapping: $.
