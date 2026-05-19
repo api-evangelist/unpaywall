@@ -1,0 +1,84 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Unpaywall API — DOI Lookup
+  description: 'Unpaywall API — DOI Lookup. 1 operations. Lead operation: Get Open Access Status by DOI. Self-contained Naftiko
+    capability covering one Unpaywall business surface.'
+  tags:
+  - Unpaywall
+  - DOI Lookup
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    UNPAYWALL_API_KEY: UNPAYWALL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: unpaywall-doi-lookup
+    baseUri: https://api.unpaywall.org/v2
+    description: Unpaywall API — DOI Lookup business capability. Self-contained, no shared references.
+    resources:
+    - name: doi
+      path: /{doi}
+      operations:
+      - name: getbydoi
+        method: GET
+        description: Get Open Access Status by DOI
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: doi
+          in: path
+          type: string
+          description: The DOI of the article (e.g., 10.1038/nature12373)
+          required: true
+        - name: email
+          in: query
+          type: string
+          description: Your email address — required for all API calls to identify usage
+          required: true
+  exposes:
+  - type: rest
+    namespace: unpaywall-doi-lookup-rest
+    port: 8080
+    description: REST adapter for Unpaywall API — DOI Lookup. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/{doi}
+      name: doi
+      description: REST surface for doi.
+      operations:
+      - method: GET
+        name: getbydoi
+        description: Get Open Access Status by DOI
+        call: unpaywall-doi-lookup.getbydoi
+        with:
+          doi: rest.doi
+          email: rest.email
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: unpaywall-doi-lookup-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Unpaywall API — DOI Lookup. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-open-access-status-doi
+      description: Get Open Access Status by DOI
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: unpaywall-doi-lookup.getbydoi
+      with:
+        doi: tools.doi
+        email: tools.email
+      outputParameters:
+      - type: object
+        mapping: $.

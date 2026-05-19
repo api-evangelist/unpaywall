@@ -1,0 +1,96 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Unpaywall API — Search
+  description: 'Unpaywall API — Search. 1 operations. Lead operation: Search Articles by Title. Self-contained Naftiko capability
+    covering one Unpaywall business surface.'
+  tags:
+  - Unpaywall
+  - Search
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    UNPAYWALL_API_KEY: UNPAYWALL_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: unpaywall-search
+    baseUri: https://api.unpaywall.org/v2
+    description: Unpaywall API — Search business capability. Self-contained, no shared references.
+    resources:
+    - name: search
+      path: /search/
+      operations:
+      - name: searchbytitle
+        method: GET
+        description: Search Articles by Title
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: query
+          in: query
+          type: string
+          description: Title search query. Supports AND (default), OR, phrase matching ("exact phrase"), and negation (-term).
+          required: true
+        - name: email
+          in: query
+          type: string
+          description: Your email address — required for all API calls
+          required: true
+        - name: is_oa
+          in: query
+          type: boolean
+          description: Filter results to open access articles only (true) or closed access only (false)
+        - name: page
+          in: query
+          type: integer
+          description: Pagination page number (50 results per page)
+  exposes:
+  - type: rest
+    namespace: unpaywall-search-rest
+    port: 8080
+    description: REST adapter for Unpaywall API — Search. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/search
+      name: search
+      description: REST surface for search.
+      operations:
+      - method: GET
+        name: searchbytitle
+        description: Search Articles by Title
+        call: unpaywall-search.searchbytitle
+        with:
+          query: rest.query
+          email: rest.email
+          is_oa: rest.is_oa
+          page: rest.page
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: unpaywall-search-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Unpaywall API — Search. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: search-articles-title
+      description: Search Articles by Title
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: unpaywall-search.searchbytitle
+      with:
+        query: tools.query
+        email: tools.email
+        is_oa: tools.is_oa
+        page: tools.page
+      outputParameters:
+      - type: object
+        mapping: $.
