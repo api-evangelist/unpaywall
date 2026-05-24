@@ -61,6 +61,8 @@ common:
     url: https://raw.githubusercontent.com/api-evangelist/unpaywall/refs/heads/main/vocabulary/unpaywall-vocabulary.yml
   - type: JSONLDContext
     url: https://raw.githubusercontent.com/api-evangelist/unpaywall/refs/heads/main/json-ld/unpaywall-context.jsonld
+  - type: LLMsTxt
+    url: https://unpaywall.org/llms.txt
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
