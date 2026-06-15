@@ -1,0 +1,404 @@
+{
+  "item": [
+    {
+      "id": "b64453a7-d0e4-45bf-aaa1-879f1f3457ff",
+      "name": "DOI Lookup",
+      "description": {
+        "content": "Look up open access status by DOI",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1f080088-30f9-4115-b7e6-3ea340850cb8",
+          "name": "Get Open Access Status by DOI",
+          "request": {
+            "name": "Get Open Access Status by DOI",
+            "description": {
+              "content": "Retrieve open access information for a scholarly article identified by its DOI. Returns the OA status, best open access location, all available OA locations, journal metadata, and author information.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":doi"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<email>",
+                  "description": "(Required) Your email address — required for all API calls to identify usage"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "doi",
+                  "description": "(Required) The DOI of the article (e.g., 10.1038/nature12373)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b82440f0-57e9-4b60-8bee-455356b1ae2e",
+              "name": "Article OA status and location data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":doi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "email",
+                      "value": "you@example.com"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "doi",
+                      "description": "(Required) The DOI of the article (e.g., 10.1038/nature12373)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"doi\": \"10.1038/nature12373\",\n  \"is_oa\": false,\n  \"data_standard\": 2,\n  \"doi_url\": \"https://doi.org/10.1038/nature12373\",\n  \"title\": \"Measurement of the Higgs boson mass from the H→γγ and H→ZZ*→4ℓ channels\",\n  \"genre\": \"journal-article\",\n  \"is_paratext\": false,\n  \"published_date\": \"2013-07-30\",\n  \"year\": 2013,\n  \"journal_name\": \"Nature\",\n  \"journal_issns\": \"0028-0836,1476-4687\",\n  \"journal_issn_l\": \"0028-0836\",\n  \"journal_is_oa\": false,\n  \"journal_is_in_doaj\": false,\n  \"publisher\": \"Springer Nature\",\n  \"oa_status\": \"gold\",\n  \"has_repository_copy\": false,\n  \"best_oa_location\": {\n    \"url\": \"https://www.nature.com/articles/nature12373.pdf\",\n    \"url_for_pdf\": \"https://arxiv.org/pdf/1304.1068\",\n    \"url_for_landing_page\": \"https://doi.org/10.1038/nature12373\",\n    \"host_type\": \"repository\",\n    \"version\": \"acceptedVersion\",\n    \"license\": \"cc-by\",\n    \"oa_date\": \"2013-07-30\",\n    \"is_best\": true,\n    \"endpoint_id\": null,\n    \"pmh_id\": \"oai:arXiv.org:1304.1068\",\n    \"repository_institution\": \"Cornell University\",\n    \"evidence\": null,\n    \"updated\": \"string\"\n  },\n  \"first_oa_location\": {\n    \"url\": \"https://www.nature.com/articles/nature12373.pdf\",\n    \"url_for_pdf\": \"https://arxiv.org/pdf/1304.1068\",\n    \"url_for_landing_page\": \"https://doi.org/10.1038/nature12373\",\n    \"host_type\": \"repository\",\n    \"version\": \"acceptedVersion\",\n    \"license\": \"cc-by\",\n    \"oa_date\": \"2013-07-30\",\n    \"is_best\": false,\n    \"endpoint_id\": \"string\",\n    \"pmh_id\": \"oai:arXiv.org:1304.1068\",\n    \"repository_institution\": \"Cornell University\",\n    \"evidence\": null,\n    \"updated\": null\n  },\n  \"oa_locations\": [\n    {\n      \"url\": \"https://www.nature.com/articles/nature12373.pdf\",\n      \"url_for_pdf\": \"https://arxiv.org/pdf/1304.1068\",\n      \"url_for_landing_page\": \"https://doi.org/10.1038/nature12373\",\n      \"host_type\": \"repository\",\n      \"version\": \"acceptedVersion\",\n      \"license\": \"cc-by\",\n      \"oa_date\": \"2013-07-30\",\n      \"is_best\": false,\n      \"endpoint_id\": null,\n      \"pmh_id\": \"oai:arXiv.org:1304.1068\",\n      \"repository_institution\": \"Cornell University\",\n      \"evidence\": null,\n      \"updated\": \"string\"\n    },\n    {\n      \"url\": \"https://www.nature.com/articles/nature12373.pdf\",\n      \"url_for_pdf\": \"https://arxiv.org/pdf/1304.1068\",\n      \"url_for_landing_page\": \"https://doi.org/10.1038/nature12373\",\n      \"host_type\": \"repository\",\n      \"version\": \"acceptedVersion\",\n      \"license\": \"cc-by\",\n      \"oa_date\": \"2013-07-30\",\n      \"is_best\": true,\n      \"endpoint_id\": \"string\",\n      \"pmh_id\": \"oai:arXiv.org:1304.1068\",\n      \"repository_institution\": \"Cornell University\",\n      \"evidence\": \"string\",\n      \"updated\": null\n    }\n  ],\n  \"oa_locations_embargoed\": [\n    {\n      \"url\": \"https://www.nature.com/articles/nature12373.pdf\",\n      \"url_for_pdf\": \"https://arxiv.org/pdf/1304.1068\",\n      \"url_for_landing_page\": \"https://doi.org/10.1038/nature12373\",\n      \"host_type\": \"repository\",\n      \"version\": \"acceptedVersion\",\n      \"license\": \"cc-by\",\n      \"oa_date\": \"2013-07-30\",\n      \"is_best\": false,\n      \"endpoint_id\": null,\n      \"pmh_id\": \"oai:arXiv.org:1304.1068\",\n      \"repository_institution\": \"Cornell University\",\n      \"evidence\": \"string\",\n      \"updated\": \"string\"\n    },\n    {\n      \"url\": \"https://www.nature.com/articles/nature12373.pdf\",\n      \"url_for_pdf\": \"https://arxiv.org/pdf/1304.1068\",\n      \"url_for_landing_page\": \"https://doi.org/10.1038/nature12373\",\n      \"host_type\": \"repository\",\n      \"version\": \"acceptedVersion\",\n      \"license\": \"cc-by\",\n      \"oa_date\": \"2013-07-30\",\n      \"is_best\": false,\n      \"endpoint_id\": null,\n      \"pmh_id\": \"oai:arXiv.org:1304.1068\",\n      \"repository_institution\": \"Cornell University\",\n      \"evidence\": null,\n      \"updated\": \"string\"\n    }\n  ],\n  \"z_authors\": null,\n  \"updated\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c69ebc93-e0ec-4963-92bc-95df83c70330",
+              "name": "DOI not found in Unpaywall database",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":doi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "email",
+                      "value": "you@example.com"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "doi",
+                      "description": "(Required) The DOI of the article (e.g., 10.1038/nature12373)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"HTTP_status_code\": 404,\n  \"error\": true,\n  \"message\": \"Sorry, we don't have any data for that DOI\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a62777d7-47c0-4acd-a26d-394c3d1cff39",
+              "name": "Invalid email or missing required parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":doi"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "email",
+                      "value": "you@example.com"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "doi",
+                      "description": "(Required) The DOI of the article (e.g., 10.1038/nature12373)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"HTTP_status_code\": 404,\n  \"error\": true,\n  \"message\": \"Sorry, we don't have any data for that DOI\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "b937e644-1bce-4e52-9399-b9ba765aaee0",
+      "name": "Search",
+      "description": {
+        "content": "Search articles by title",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "63fab20b-e1e1-4c4e-88a2-1404d3701da8",
+          "name": "Search Articles by Title",
+          "request": {
+            "name": "Search Articles by Title",
+            "description": {
+              "content": "Search the Unpaywall database by article title. Returns up to 50 matching articles per page with relevance scores and title snippets. Covers 120M+ articles with Crossref DOIs updated within 24 hours. Supports AND logic (default), phrase matching (quoted), OR operator, and negation (-term).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "search",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "(Required) Title search query. Supports AND (default), OR, phrase matching (\"exact phrase\"), and negation (-term)."
+                },
+                {
+                  "disabled": false,
+                  "key": "email",
+                  "value": "<email>",
+                  "description": "(Required) Your email address — required for all API calls"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_oa",
+                  "value": "<boolean>",
+                  "description": "Filter results to open access articles only (true) or closed access only (false)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Pagination page number (50 results per page)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "31ccd31c-087d-400e-8eba-de21bc225d59",
+              "name": "Search results with relevance scores",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "machine learning drug discovery"
+                    },
+                    {
+                      "key": "email",
+                      "value": "you@example.com"
+                    },
+                    {
+                      "key": "is_oa",
+                      "value": "true"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"response\": {\n        \"doi\": \"10.1038/nature12373\",\n        \"is_oa\": false,\n        \"data_standard\": 2,\n        \"doi_url\": \"https://doi.org/10.1038/nature12373\",\n        \"title\": \"Measurement of the Higgs boson mass from the H→γγ and H→ZZ*→4ℓ channels\",\n        \"genre\": \"journal-article\",\n        \"is_paratext\": false,\n        \"published_date\": \"2013-07-30\",\n        \"year\": 2013,\n        \"journal_name\": \"Nature\",\n        \"journal_issns\": \"0028-0836,1476-4687\",\n        \"journal_issn_l\": \"0028-0836\",\n        \"journal_is_oa\": false,\n        \"journal_is_in_doaj\": false,\n        \"publisher\": \"Springer Nature\",\n        \"oa_status\": \"gold\",\n        \"has_repository_copy\": false,\n        \"best_oa_location\": {\n          \"url\": \"https://www.nature.com/articles/nature12373.pdf\",\n          \"url_for_pdf\": \"https://arxiv.org/pdf/1304.1068\",\n          \"url_for_landing_page\": \"https://doi.org/10.1038/nature12373\",\n          \"host_type\": \"repository\",\n          \"version\": \"acceptedVersion\",\n          \"license\": \"cc-by\",\n          \"oa_date\": \"2013-07-30\",\n          \"is_best\": false,\n          \"endpoint_id\": \"string\",\n          \"pmh_id\": \"oai:arXiv.org:1304.1068\",\n          \"repository_institution\": \"Cornell University\",\n          \"evidence\": \"string\",\n          \"updated\": null\n        },\n        \"first_oa_location\": {\n          \"url\": \"https://www.nature.com/articles/nature12373.pdf\",\n          \"url_for_pdf\": \"https://arxiv.org/pdf/1304.1068\",\n          \"url_for_landing_page\": \"https://doi.org/10.1038/nature12373\",\n          \"host_type\": \"repository\",\n          \"version\": \"acceptedVersion\",\n          \"license\": \"cc-by\",\n          \"oa_date\": \"2013-07-30\",\n          \"is_best\": false,\n          \"endpoint_id\": null,\n          \"pmh_id\": \"oai:arXiv.org:1304.1068\",\n          \"repository_institution\": \"Cornell University\",\n          \"evidence\": \"string\",\n          \"updated\": \"string\"\n        },\n        \"oa_locations\": [\n          {\n            \"url\": \"https://www.nature.com/articles/nature12373.pdf\",\n            \"url_for_pdf\": \"https://arxiv.org/pdf/1304.1068\",\n            \"url_for_landing_page\": \"https://doi.org/10.1038/nature12373\",\n            \"host_type\": \"repository\",\n            \"version\": \"acceptedVersion\",\n            \"license\": \"cc-by\",\n            \"oa_date\": \"2013-07-30\",\n            \"is_best\": false,\n            \"endpoint_id\": \"string\",\n            \"pmh_id\": \"oai:arXiv.org:1304.1068\",\n            \"repository_institution\": \"Cornell University\",\n            \"evidence\": null,\n            \"updated\": \"string\"\n          },\n          {\n            \"url\": \"https://www.nature.com/articles/nature12373.pdf\",\n            \"url_for_pdf\": \"https://arxiv.org/pdf/1304.1068\",\n            \"url_for_landing_page\": \"https://doi.org/10.1038/nature12373\",\n            \"host_type\": \"repository\",\n            \"version\": \"acceptedVersion\",\n            \"license\": \"cc-by\",\n            \"oa_date\": \"2013-07-30\",\n            \"is_best\": false,\n            \"endpoint_id\": null,\n            \"pmh_id\": \"oai:arXiv.org:1304.1068\",\n            \"repository_institution\": \"Cornell University\",\n            \"evidence\": null,\n            \"updated\": \"string\"\n          }\n        ],\n        \"oa_locations_embargoed\": [\n          {\n            \"url\": \"https://www.nature.com/articles/nature12373.pdf\",\n            \"url_for_pdf\": \"https://arxiv.org/pdf/1304.1068\",\n            \"url_for_landing_page\": \"https://doi.org/10.1038/nature12373\",\n            \"host_type\": \"repository\",\n            \"version\": \"acceptedVersion\",\n            \"license\": \"cc-by\",\n            \"oa_date\": \"2013-07-30\",\n            \"is_best\": false,\n            \"endpoint_id\": null,\n            \"pmh_id\": \"oai:arXiv.org:1304.1068\",\n            \"repository_institution\": \"Cornell University\",\n            \"evidence\": \"string\",\n            \"updated\": \"string\"\n          },\n          {\n            \"url\": \"https://www.nature.com/articles/nature12373.pdf\",\n            \"url_for_pdf\": \"https://arxiv.org/pdf/1304.1068\",\n            \"url_for_landing_page\": \"https://doi.org/10.1038/nature12373\",\n            \"host_type\": \"repository\",\n            \"version\": \"acceptedVersion\",\n            \"license\": \"cc-by\",\n            \"oa_date\": \"2013-07-30\",\n            \"is_best\": true,\n            \"endpoint_id\": null,\n            \"pmh_id\": \"oai:arXiv.org:1304.1068\",\n            \"repository_institution\": \"Cornell University\",\n            \"evidence\": null,\n            \"updated\": null\n          }\n        ],\n        \"z_authors\": null,\n        \"updated\": \"string\"\n      },\n      \"score\": 45.3,\n      \"snippet\": \"Measurement of the <b>Higgs</b> boson mass\"\n    },\n    {\n      \"response\": {\n        \"doi\": \"10.1038/nature12373\",\n        \"is_oa\": true,\n        \"data_standard\": 2,\n        \"doi_url\": \"https://doi.org/10.1038/nature12373\",\n        \"title\": \"Measurement of the Higgs boson mass from the H→γγ and H→ZZ*→4ℓ channels\",\n        \"genre\": \"journal-article\",\n        \"is_paratext\": false,\n        \"published_date\": \"2013-07-30\",\n        \"year\": 2013,\n        \"journal_name\": \"Nature\",\n        \"journal_issns\": \"0028-0836,1476-4687\",\n        \"journal_issn_l\": \"0028-0836\",\n        \"journal_is_oa\": false,\n        \"journal_is_in_doaj\": false,\n        \"publisher\": \"Springer Nature\",\n        \"oa_status\": \"gold\",\n        \"has_repository_copy\": false,\n        \"best_oa_location\": {\n          \"url\": \"https://www.nature.com/articles/nature12373.pdf\",\n          \"url_for_pdf\": \"https://arxiv.org/pdf/1304.1068\",\n          \"url_for_landing_page\": \"https://doi.org/10.1038/nature12373\",\n          \"host_type\": \"repository\",\n          \"version\": \"acceptedVersion\",\n          \"license\": \"cc-by\",\n          \"oa_date\": \"2013-07-30\",\n          \"is_best\": false,\n          \"endpoint_id\": null,\n          \"pmh_id\": \"oai:arXiv.org:1304.1068\",\n          \"repository_institution\": \"Cornell University\",\n          \"evidence\": null,\n          \"updated\": null\n        },\n        \"first_oa_location\": {\n          \"url\": \"https://www.nature.com/articles/nature12373.pdf\",\n          \"url_for_pdf\": \"https://arxiv.org/pdf/1304.1068\",\n          \"url_for_landing_page\": \"https://doi.org/10.1038/nature12373\",\n          \"host_type\": \"repository\",\n          \"version\": \"acceptedVersion\",\n          \"license\": \"cc-by\",\n          \"oa_date\": \"2013-07-30\",\n          \"is_best\": true,\n          \"endpoint_id\": null,\n          \"pmh_id\": \"oai:arXiv.org:1304.1068\",\n          \"repository_institution\": \"Cornell University\",\n          \"evidence\": null,\n          \"updated\": null\n        },\n        \"oa_locations\": [\n          {\n            \"url\": \"https://www.nature.com/articles/nature12373.pdf\",\n            \"url_for_pdf\": \"https://arxiv.org/pdf/1304.1068\",\n            \"url_for_landing_page\": \"https://doi.org/10.1038/nature12373\",\n            \"host_type\": \"repository\",\n            \"version\": \"acceptedVersion\",\n            \"license\": \"cc-by\",\n            \"oa_date\": \"2013-07-30\",\n            \"is_best\": false,\n            \"endpoint_id\": \"string\",\n            \"pmh_id\": \"oai:arXiv.org:1304.1068\",\n            \"repository_institution\": \"Cornell University\",\n            \"evidence\": \"string\",\n            \"updated\": null\n          },\n          {\n            \"url\": \"https://www.nature.com/articles/nature12373.pdf\",\n            \"url_for_pdf\": \"https://arxiv.org/pdf/1304.1068\",\n            \"url_for_landing_page\": \"https://doi.org/10.1038/nature12373\",\n            \"host_type\": \"repository\",\n            \"version\": \"acceptedVersion\",\n            \"license\": \"cc-by\",\n            \"oa_date\": \"2013-07-30\",\n            \"is_best\": false,\n            \"endpoint_id\": \"string\",\n            \"pmh_id\": \"oai:arXiv.org:1304.1068\",\n            \"repository_institution\": \"Cornell University\",\n            \"evidence\": \"string\",\n            \"updated\": null\n          }\n        ],\n        \"oa_locations_embargoed\": [\n          {\n            \"url\": \"https://www.nature.com/articles/nature12373.pdf\",\n            \"url_for_pdf\": \"https://arxiv.org/pdf/1304.1068\",\n            \"url_for_landing_page\": \"https://doi.org/10.1038/nature12373\",\n            \"host_type\": \"repository\",\n            \"version\": \"acceptedVersion\",\n            \"license\": \"cc-by\",\n            \"oa_date\": \"2013-07-30\",\n            \"is_best\": true,\n            \"endpoint_id\": null,\n            \"pmh_id\": \"oai:arXiv.org:1304.1068\",\n            \"repository_institution\": \"Cornell University\",\n            \"evidence\": \"string\",\n            \"updated\": null\n          },\n          {\n            \"url\": \"https://www.nature.com/articles/nature12373.pdf\",\n            \"url_for_pdf\": \"https://arxiv.org/pdf/1304.1068\",\n            \"url_for_landing_page\": \"https://doi.org/10.1038/nature12373\",\n            \"host_type\": \"repository\",\n            \"version\": \"acceptedVersion\",\n            \"license\": \"cc-by\",\n            \"oa_date\": \"2013-07-30\",\n            \"is_best\": true,\n            \"endpoint_id\": null,\n            \"pmh_id\": \"oai:arXiv.org:1304.1068\",\n            \"repository_institution\": \"Cornell University\",\n            \"evidence\": \"string\",\n            \"updated\": \"string\"\n          }\n        ],\n        \"z_authors\": [\n          {\n            \"given\": \"string\",\n            \"family\": \"string\",\n            \"ORCID\": \"string\",\n            \"affiliation\": [\n              {\n                \"name\": \"string\"\n              },\n              {\n                \"name\": \"string\"\n              }\n            ]\n          },\n          {\n            \"given\": \"string\",\n            \"family\": \"string\",\n            \"ORCID\": \"string\",\n            \"affiliation\": [\n              {\n                \"name\": \"string\"\n              },\n              {\n                \"name\": \"string\"\n              }\n            ]\n          }\n        ],\n        \"updated\": null\n      },\n      \"score\": 45.3,\n      \"snippet\": \"Measurement of the <b>Higgs</b> boson mass\"\n    }\n  ],\n  \"elapsed_seconds\": 0.042\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "920a3f4e-e587-4363-a3ee-44e909583776",
+              "name": "Invalid email or missing required parameter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "search",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "machine learning drug discovery"
+                    },
+                    {
+                      "key": "email",
+                      "value": "you@example.com"
+                    },
+                    {
+                      "key": "is_oa",
+                      "value": "true"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"HTTP_status_code\": 404,\n  \"error\": true,\n  \"message\": \"Sorry, we don't have any data for that DOI\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.unpaywall.org/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b79a770b-321b-41fd-bb6f-4a712414a5bc",
+    "name": "Unpaywall API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Unpaywall REST API gives anyone free, programmatic access to the Unpaywall database of open access scholarly articles. The database covers over 120 million articles with Crossref DOIs and links to free, legal full-text versions where available. Authentication is done via an email address query parameter (no API key required). Usage is limited to 100,000 calls per day.\n\nContact Support:\n Name: Unpaywall Support",
+      "type": "text/plain"
+    }
+  }
+}
