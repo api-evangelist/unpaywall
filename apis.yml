@@ -44,6 +44,8 @@ apis:
         url: >-
           https://raw.githubusercontent.com/api-evangelist/unpaywall/refs/heads/main/json-schema/unpaywall-article-schema.json
 common:
+  - type: DomainSecurity
+    url: security/unpaywall-domain-security.yml
   - type: GitHubOrganization
     url: https://github.com/ourresearch
   - type: LinkedIn
