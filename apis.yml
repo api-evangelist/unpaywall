@@ -44,6 +44,8 @@ apis:
         url: >-
           https://raw.githubusercontent.com/api-evangelist/unpaywall/refs/heads/main/json-schema/unpaywall-article-schema.json
 common:
+  - type: AgenticAccess
+    url: agentic-access/unpaywall-agentic-access.yml
   - type: DomainSecurity
     url: security/unpaywall-domain-security.yml
   - type: GitHubOrganization
