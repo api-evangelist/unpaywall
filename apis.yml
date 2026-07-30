@@ -1,4 +1,17 @@
 aid: unpaywall
+accessModel:
+  pricing: freemium
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Freemium
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/unpaywall.png
 name: Unpaywall
 description: >-
   The Unpaywall REST API gives anyone free, programmatic access to the Unpaywall database of open access scholarly
@@ -19,30 +32,42 @@ tags:
   - DOI
   - Science
 apis:
-  - aid: unpaywall:unpaywall
-    name: Unpaywall API
-    description: >-
-      Free REST API providing open access status and full-text links for 120M+ scholarly articles. Look up any article
-      by DOI to get its OA status, best open access location (publisher or repository), license, version, and all
-      available free copies. Also supports title-based search across the full database. No API key required — just
-      include your email address in requests. Rate limit: 100,000 calls per day.
-    humanURL: https://unpaywall.org/products/api
-    baseURL: https://api.unpaywall.org/v2
-    tags:
-      - Open Access
-      - DOI
-      - Scholarly Articles
-      - Search
-    properties:
-      - type: Documentation
-        url: https://unpaywall.org/products/api
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/api-evangelist/unpaywall/refs/heads/main/openapi/unpaywall-openapi.yml
-      - type: SpectralRules
-        url: https://raw.githubusercontent.com/api-evangelist/unpaywall/refs/heads/main/rules/unpaywall-rules.yml
-      - type: JSONSchema
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/unpaywall/refs/heads/main/json-schema/unpaywall-article-schema.json
+- aid: unpaywall:unpaywall-doi-lookup-api
+  name: Unpaywall DOI Lookup API
+  description: Look up open access status by DOI
+  humanURL: https://unpaywall.org/products/api
+  baseURL: https://api.unpaywall.org/v2
+  tags:
+  - DOI Lookup
+  properties:
+  - type: OpenAPI
+    url: openapi/unpaywall-doi-lookup-api-openapi.yml
+  - type: Documentation
+    url: https://unpaywall.org/products/api
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/unpaywall/refs/heads/main/rules/unpaywall-rules.yml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/unpaywall/refs/heads/main/json-schema/unpaywall-article-schema.json
+- aid: unpaywall:unpaywall-search-api
+  name: Unpaywall Search API
+  description: Search articles by title
+  humanURL: https://unpaywall.org/products/api
+  baseURL: https://api.unpaywall.org/v2
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/unpaywall-search-api-openapi.yml
+  - type: Documentation
+    url: https://unpaywall.org/products/api
+  - type: SpectralRules
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/unpaywall/refs/heads/main/rules/unpaywall-rules.yml
+  - type: JSONSchema
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/unpaywall/refs/heads/main/json-schema/unpaywall-article-schema.json
 common:
   - type: AgenticAccess
     url: agentic-access/unpaywall-agentic-access.yml
