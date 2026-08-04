@@ -1,0 +1,16 @@
+{
+  "provider": "unpaywall",
+  "sources": [
+    "unpaywall-doi-lookup-api-openapi.yml",
+    "unpaywall-search-api-openapi.yml"
+  ],
+  "outputs": [
+    "unpaywall-doi-lookup-api-openapi.yml",
+    "unpaywall-search-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

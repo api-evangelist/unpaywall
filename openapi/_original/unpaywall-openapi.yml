@@ -1,0 +1,376 @@
+openapi: 3.0.3
+info:
+  title: Unpaywall API
+  description: >-
+    The Unpaywall REST API gives anyone free, programmatic access to the Unpaywall
+    database of open access scholarly articles. The database covers over 120 million
+    articles with Crossref DOIs and links to free, legal full-text versions where
+    available. Authentication is done via an email address query parameter (no API
+    key required). Usage is limited to 100,000 calls per day.
+  version: 2.0.0
+  contact:
+    name: Unpaywall Support
+    url: https://support.unpaywall.org
+  license:
+    name: Creative Commons CC0
+    url: https://creativecommons.org/publicdomain/zero/1.0/
+servers:
+  - url: https://api.unpaywall.org/v2
+    description: Unpaywall API v2
+
+tags:
+  - name: DOI Lookup
+    description: Look up open access status by DOI
+  - name: Search
+    description: Search articles by title
+
+paths:
+  /{doi}:
+    get:
+      operationId: getByDoi
+      summary: Get Open Access Status by DOI
+      description: >-
+        Retrieve open access information for a scholarly article identified by its DOI.
+        Returns the OA status, best open access location, all available OA locations,
+        journal metadata, and author information.
+      tags:
+        - DOI Lookup
+      parameters:
+        - name: doi
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The DOI of the article (e.g., 10.1038/nature12373)
+          example: "10.1038/nature12373"
+        - name: email
+          in: query
+          required: true
+          schema:
+            type: string
+            format: email
+          description: Your email address — required for all API calls to identify usage
+          example: "you@example.com"
+      responses:
+        "200":
+          description: Article OA status and location data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnpaywallObject'
+        "404":
+          description: DOI not found in Unpaywall database
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "422":
+          description: Invalid email or missing required parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /search/:
+    get:
+      operationId: searchByTitle
+      summary: Search Articles by Title
+      description: >-
+        Search the Unpaywall database by article title. Returns up to 50 matching
+        articles per page with relevance scores and title snippets. Covers 120M+
+        articles with Crossref DOIs updated within 24 hours. Supports AND logic
+        (default), phrase matching (quoted), OR operator, and negation (-term).
+      tags:
+        - Search
+      parameters:
+        - name: query
+          in: query
+          required: true
+          schema:
+            type: string
+          description: >-
+            Title search query. Supports AND (default), OR, phrase matching ("exact phrase"),
+            and negation (-term).
+          example: "machine learning drug discovery"
+        - name: email
+          in: query
+          required: true
+          schema:
+            type: string
+            format: email
+          description: Your email address — required for all API calls
+          example: "you@example.com"
+        - name: is_oa
+          in: query
+          required: false
+          schema:
+            type: boolean
+          description: Filter results to open access articles only (true) or closed access only (false)
+          example: true
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+          description: Pagination page number (50 results per page)
+          example: 1
+      responses:
+        "200":
+          description: Search results with relevance scores
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+        "422":
+          description: Invalid email or missing required parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    UnpaywallObject:
+      type: object
+      description: >-
+        The full Unpaywall object for a scholarly article, containing OA status,
+        all open access locations, journal metadata, and bibliographic information.
+      required:
+        - doi
+        - is_oa
+        - data_standard
+      properties:
+        doi:
+          type: string
+          description: The DOI of the article (lowercased)
+          example: "10.1038/nature12373"
+        doi_url:
+          type: string
+          format: uri
+          description: The canonical URL for the DOI (https://doi.org/{doi})
+          example: "https://doi.org/10.1038/nature12373"
+        title:
+          type: ["string", "null"]
+          description: Article title
+          example: "Measurement of the Higgs boson mass from the H→γγ and H→ZZ*→4ℓ channels"
+        genre:
+          type: ["string", "null"]
+          description: Article type from Crossref (journal-article, book-chapter, conference-paper, etc.)
+          example: "journal-article"
+        is_paratext:
+          type: boolean
+          description: >-
+            True if this is metadata about a journal issue, conference proceeding, or
+            editorial (paratext rather than research). These should generally be filtered out.
+          default: false
+        published_date:
+          type: ["string", "null"]
+          description: ISO 8601 publication date (YYYY-MM-DD or partial)
+          example: "2013-07-30"
+        year:
+          type: ["integer", "null"]
+          description: Publication year
+          example: 2013
+        journal_name:
+          type: ["string", "null"]
+          description: Journal display name
+          example: "Nature"
+        journal_issns:
+          type: ["string", "null"]
+          description: Comma-separated list of ISSNs for the journal
+          example: "0028-0836,1476-4687"
+        journal_issn_l:
+          type: ["string", "null"]
+          description: The linking ISSN (ISSN-L) for the journal
+          example: "0028-0836"
+        journal_is_oa:
+          type: boolean
+          description: True if the journal is fully open access (gold OA)
+          default: false
+        journal_is_in_doaj:
+          type: boolean
+          description: True if the journal appears in the Directory of Open Access Journals (DOAJ)
+          default: false
+        publisher:
+          type: ["string", "null"]
+          description: Publisher name from Crossref
+          example: "Springer Nature"
+        is_oa:
+          type: boolean
+          description: >-
+            True if there is a free, legal full-text version of this article available.
+            This is the primary field for determining open access status.
+        oa_status:
+          type: ["string", "null"]
+          description: >-
+            The open access color/type: gold, hybrid, bronze, green, or closed.
+            Gold = fully OA journal. Hybrid = OA in a subscription journal.
+            Bronze = free to read but no explicit license. Green = repository copy.
+          enum: ["gold", "hybrid", "bronze", "green", "closed", null]
+          example: "gold"
+        has_repository_copy:
+          type: boolean
+          description: True if there is a copy in a repository (green OA)
+          default: false
+        best_oa_location:
+          oneOf:
+            - $ref: '#/components/schemas/OALocation'
+            - type: "null"
+          description: The best (highest quality) open access location for this article
+        first_oa_location:
+          oneOf:
+            - $ref: '#/components/schemas/OALocation'
+            - type: "null"
+          description: The first open access location found (chronologically)
+        oa_locations:
+          type: array
+          items:
+            $ref: '#/components/schemas/OALocation'
+          description: All open access locations found for this article
+        oa_locations_embargoed:
+          type: array
+          items:
+            $ref: '#/components/schemas/OALocation'
+          description: Open access locations that are currently under embargo
+        data_standard:
+          type: integer
+          description: >-
+            Version of data processing used. 2 = current standard with full OA location
+            details. Used to filter results to most complete records.
+          example: 2
+        z_authors:
+          type: ["array", "null"]
+          description: >-
+            Author metadata from Crossref (deprecated field name, kept for backwards
+            compatibility). Each item is a Crossref author object.
+          items:
+            type: object
+            properties:
+              given:
+                type: string
+                description: Author given name
+              family:
+                type: string
+                description: Author family name
+              ORCID:
+                type: string
+                description: Author ORCID identifier
+              affiliation:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+        updated:
+          type: ["string", "null"]
+          description: >-
+            ISO 8601 timestamp when this record was last updated in Unpaywall.
+            May show "deprecated" in some records.
+
+    OALocation:
+      type: object
+      description: A single open access location for a scholarly article
+      properties:
+        url:
+          type: ["string", "null"]
+          format: uri
+          description: URL for the best available version (PDF or landing page)
+          example: "https://www.nature.com/articles/nature12373.pdf"
+        url_for_pdf:
+          type: ["string", "null"]
+          format: uri
+          description: Direct URL to the PDF if available
+          example: "https://arxiv.org/pdf/1304.1068"
+        url_for_landing_page:
+          type: ["string", "null"]
+          format: uri
+          description: URL to the article landing page
+          example: "https://doi.org/10.1038/nature12373"
+        host_type:
+          type: ["string", "null"]
+          description: Where the OA version is hosted (publisher or repository)
+          enum: ["publisher", "repository", null]
+          example: "repository"
+        version:
+          type: ["string", "null"]
+          description: >-
+            Version of the article (publishedVersion, acceptedVersion, submittedVersion).
+            publishedVersion is the final typeset version. acceptedVersion is post-peer-review.
+            submittedVersion is the pre-print.
+          enum: ["publishedVersion", "acceptedVersion", "submittedVersion", null]
+          example: "acceptedVersion"
+        license:
+          type: ["string", "null"]
+          description: Open license identifier (cc-by, cc-by-sa, cc-by-nc, etc.)
+          example: "cc-by"
+        oa_date:
+          type: ["string", "null"]
+          description: ISO 8601 date when this version became open access
+          example: "2013-07-30"
+        is_best:
+          type: boolean
+          description: True if this is the best OA location (same as best_oa_location)
+        endpoint_id:
+          type: ["string", "null"]
+          description: Identifier of the OAI-PMH repository endpoint (if applicable)
+        pmh_id:
+          type: ["string", "null"]
+          description: OAI-PMH record identifier from the repository
+          example: "oai:arXiv.org:1304.1068"
+        repository_institution:
+          type: ["string", "null"]
+          description: Name of the institution operating the repository
+          example: "Cornell University"
+        evidence:
+          type: ["string", "null"]
+          description: How Unpaywall found this OA location (may show "deprecated")
+        updated:
+          type: ["string", "null"]
+          description: When this OA location record was last updated
+
+    SearchResponse:
+      type: object
+      description: Title search response containing matching articles with scores
+      properties:
+        results:
+          type: array
+          description: Up to 50 matching articles per page
+          items:
+            type: object
+            properties:
+              response:
+                $ref: '#/components/schemas/UnpaywallObject'
+                description: Full Unpaywall object for the matching article
+              score:
+                type: number
+                format: float
+                description: Relevance score for this result
+                example: 45.3
+              snippet:
+                type: string
+                description: Article title snippet with matched terms highlighted
+                example: "Measurement of the <b>Higgs</b> boson mass"
+        elapsed_seconds:
+          type: number
+          format: float
+          description: Query processing time in seconds
+          example: 0.042
+
+    ErrorResponse:
+      type: object
+      description: Error response from the Unpaywall API
+      properties:
+        HTTP_status_code:
+          type: integer
+          description: HTTP status code
+          example: 404
+        error:
+          type: boolean
+          description: Always true for error responses
+          default: true
+        message:
+          type: string
+          description: Human-readable error message
+          example: "Sorry, we don't have any data for that DOI"
