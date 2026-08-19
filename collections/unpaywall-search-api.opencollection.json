@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Unpaywall DOI Lookup Search API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Articles by Title",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.unpaywall.org/v2/search/",
+            "params": [
+              {
+                "name": "query",
+                "value": "machine learning drug discovery",
+                "type": "query",
+                "description": "Title search query. Supports AND (default), OR, phrase matching (\"exact phrase\"), and negation (-term)."
+              },
+              {
+                "name": "email",
+                "value": "you@example.com",
+                "type": "query",
+                "description": "Your email address — required for all API calls"
+              },
+              {
+                "name": "is_oa",
+                "value": "true",
+                "type": "query",
+                "description": "Filter results to open access articles only (true) or closed access only (false)"
+              },
+              {
+                "name": "page",
+                "value": "1",
+                "type": "query",
+                "description": "Pagination page number (50 results per page)"
+              }
+            ]
+          },
+          "docs": "Search the Unpaywall database by article title. Returns up to 50 matching articles per page with relevance scores and title snippets. Covers 120M+ articles with Crossref DOIs updated within 24 hours. Supports AND logic (default), phrase matching (quoted), OR operator, and negation (-term)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
