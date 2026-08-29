@@ -1,0 +1,27 @@
+slug: unpaywall
+provider: Unpaywall
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Education
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: DOI Lookup
+  spec_file: unpaywall-doi-lookup-api-openapi.yml
+  capability_id: BC-4780.40
+  capability_id_l1: BC-4780
+  capability_name: Scholarly Output & Publication Management
+  confidence: 0.72
+  evidence: GET /{doi} getByDoi 'Get Open Access Status by DOI' — 'metadata on OA status (gold, hybrid,
+    bronze, green)'
+  reason: The single operation resolves a DOI to open-access status and full-text locations for scholarly
+    articles — stewardship/tracking of scholarly output, open access and persistent identifiers. Not a
+    library circulation or teaching-resource surface, so the research scholarly-output sub-capability
+    is the closest fit; some ambiguity vs library information resources keeps confidence moderate.

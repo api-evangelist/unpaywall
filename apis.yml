@@ -80,6 +80,9 @@ apis:
     url: >-
       https://raw.githubusercontent.com/api-evangelist/unpaywall/refs/heads/main/json-schema/unpaywall-article-schema.json
 common:
+  - type: CapabilityMap
+    url: capabilities/unpaywall-capability-edges.yml
+    name: Unpaywall Business Capability Map
   - type: AgenticAccess
     url: agentic-access/unpaywall-agentic-access.yml
   - type: DomainSecurity
