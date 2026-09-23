@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Unpaywall DOI Lookup API
   description: The Unpaywall REST API gives anyone free, programmatic access to the Unpaywall database of open access scholarly articles. The database covers over 120 million articles with Crossref DOIs and links to free, legal full-text versions where available. Authentication is done via an email address query parameter (no API key required). Usage is limited to 100,000 calls per day.
@@ -60,6 +60,110 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    OALocation:
+      type: object
+      description: A single open access location for a scholarly article
+      properties:
+        url:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: URL for the best available version (PDF or landing page)
+          example: https://www.nature.com/articles/nature12373.pdf
+        url_for_pdf:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: Direct URL to the PDF if available
+          example: https://arxiv.org/pdf/1304.1068
+        url_for_landing_page:
+          type:
+          - string
+          - 'null'
+          format: uri
+          description: URL to the article landing page
+          example: https://doi.org/10.1038/nature12373
+        host_type:
+          type:
+          - string
+          - 'null'
+          description: Where the OA version is hosted (publisher or repository)
+          enum:
+          - publisher
+          - repository
+          - null
+          example: repository
+        version:
+          type:
+          - string
+          - 'null'
+          description: Version of the article (publishedVersion, acceptedVersion, submittedVersion). publishedVersion is the final typeset version. acceptedVersion is post-peer-review. submittedVersion is the pre-print.
+          enum:
+          - publishedVersion
+          - acceptedVersion
+          - submittedVersion
+          - null
+          example: acceptedVersion
+        license:
+          type:
+          - string
+          - 'null'
+          description: Open license identifier (cc-by, cc-by-sa, cc-by-nc, etc.)
+          example: cc-by
+        oa_date:
+          type:
+          - string
+          - 'null'
+          description: ISO 8601 date when this version became open access
+          example: '2013-07-30'
+        is_best:
+          type: boolean
+          description: True if this is the best OA location (same as best_oa_location)
+        endpoint_id:
+          type:
+          - string
+          - 'null'
+          description: Identifier of the OAI-PMH repository endpoint (if applicable)
+        pmh_id:
+          type:
+          - string
+          - 'null'
+          description: OAI-PMH record identifier from the repository
+          example: oai:arXiv.org:1304.1068
+        repository_institution:
+          type:
+          - string
+          - 'null'
+          description: Name of the institution operating the repository
+          example: Cornell University
+        evidence:
+          type:
+          - string
+          - 'null'
+          description: How Unpaywall found this OA location (may show "deprecated")
+        updated:
+          type:
+          - string
+          - 'null'
+          description: When this OA location record was last updated
+    ErrorResponse:
+      type: object
+      description: Error response from the Unpaywall API
+      properties:
+        HTTP_status_code:
+          type: integer
+          description: HTTP status code
+          example: 404
+        error:
+          type: boolean
+          description: Always true for error responses
+          default: true
+        message:
+          type: string
+          description: Human-readable error message
+          example: Sorry, we don't have any data for that DOI
     UnpaywallObject:
       type: object
       description: The full Unpaywall object for a scholarly article, containing OA status, all open access locations, journal metadata, and bibliographic information.
@@ -210,107 +314,3 @@ components:
           - string
           - 'null'
           description: ISO 8601 timestamp when this record was last updated in Unpaywall. May show "deprecated" in some records.
-    ErrorResponse:
-      type: object
-      description: Error response from the Unpaywall API
-      properties:
-        HTTP_status_code:
-          type: integer
-          description: HTTP status code
-          example: 404
-        error:
-          type: boolean
-          description: Always true for error responses
-          default: true
-        message:
-          type: string
-          description: Human-readable error message
-          example: Sorry, we don't have any data for that DOI
-    OALocation:
-      type: object
-      description: A single open access location for a scholarly article
-      properties:
-        url:
-          type:
-          - string
-          - 'null'
-          format: uri
-          description: URL for the best available version (PDF or landing page)
-          example: https://www.nature.com/articles/nature12373.pdf
-        url_for_pdf:
-          type:
-          - string
-          - 'null'
-          format: uri
-          description: Direct URL to the PDF if available
-          example: https://arxiv.org/pdf/1304.1068
-        url_for_landing_page:
-          type:
-          - string
-          - 'null'
-          format: uri
-          description: URL to the article landing page
-          example: https://doi.org/10.1038/nature12373
-        host_type:
-          type:
-          - string
-          - 'null'
-          description: Where the OA version is hosted (publisher or repository)
-          enum:
-          - publisher
-          - repository
-          - null
-          example: repository
-        version:
-          type:
-          - string
-          - 'null'
-          description: Version of the article (publishedVersion, acceptedVersion, submittedVersion). publishedVersion is the final typeset version. acceptedVersion is post-peer-review. submittedVersion is the pre-print.
-          enum:
-          - publishedVersion
-          - acceptedVersion
-          - submittedVersion
-          - null
-          example: acceptedVersion
-        license:
-          type:
-          - string
-          - 'null'
-          description: Open license identifier (cc-by, cc-by-sa, cc-by-nc, etc.)
-          example: cc-by
-        oa_date:
-          type:
-          - string
-          - 'null'
-          description: ISO 8601 date when this version became open access
-          example: '2013-07-30'
-        is_best:
-          type: boolean
-          description: True if this is the best OA location (same as best_oa_location)
-        endpoint_id:
-          type:
-          - string
-          - 'null'
-          description: Identifier of the OAI-PMH repository endpoint (if applicable)
-        pmh_id:
-          type:
-          - string
-          - 'null'
-          description: OAI-PMH record identifier from the repository
-          example: oai:arXiv.org:1304.1068
-        repository_institution:
-          type:
-          - string
-          - 'null'
-          description: Name of the institution operating the repository
-          example: Cornell University
-        evidence:
-          type:
-          - string
-          - 'null'
-          description: How Unpaywall found this OA location (may show "deprecated")
-        updated:
-          type:
-          - string
-          - 'null'
-          description: When this OA location record was last updated
