@@ -69,6 +69,33 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    SearchResponse:
+      type: object
+      description: Title search response containing matching articles with scores
+      properties:
+        results:
+          type: array
+          description: Up to 50 matching articles per page
+          items:
+            type: object
+            properties:
+              response:
+                $ref: '#/components/schemas/UnpaywallObject'
+                description: Full Unpaywall object for the matching article
+              score:
+                type: number
+                format: float
+                description: Relevance score for this result
+                example: 45.3
+              snippet:
+                type: string
+                description: Article title snippet with matched terms highlighted
+                example: Measurement of the <b>Higgs</b> boson mass
+        elapsed_seconds:
+          type: number
+          format: float
+          description: Query processing time in seconds
+          example: 0.042
     OALocation:
       type: object
       description: A single open access location for a scholarly article
@@ -157,33 +184,6 @@ components:
           - string
           - 'null'
           description: When this OA location record was last updated
-    SearchResponse:
-      type: object
-      description: Title search response containing matching articles with scores
-      properties:
-        results:
-          type: array
-          description: Up to 50 matching articles per page
-          items:
-            type: object
-            properties:
-              response:
-                $ref: '#/components/schemas/UnpaywallObject'
-                description: Full Unpaywall object for the matching article
-              score:
-                type: number
-                format: float
-                description: Relevance score for this result
-                example: 45.3
-              snippet:
-                type: string
-                description: Article title snippet with matched terms highlighted
-                example: Measurement of the <b>Higgs</b> boson mass
-        elapsed_seconds:
-          type: number
-          format: float
-          description: Query processing time in seconds
-          example: 0.042
     ErrorResponse:
       type: object
       description: Error response from the Unpaywall API
