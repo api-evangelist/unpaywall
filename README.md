@@ -1,4 +1,4 @@
-# Unpaywall (unpaywall)
+# Unpaywall
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,65 +66,155 @@
 
 The Unpaywall REST API gives anyone free, programmatic access to the Unpaywall database of open access scholarly articles. The database covers over 120 million articles with Crossref DOIs and provides free, legal full-text links where available, with metadata on OA status (gold, hybrid, bronze, green), host type (publisher, repository), version (published, accepted, submitted), and license information.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/unpaywall/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/unpaywall/refs/heads/main/apis.yml)
+**Areas:** Open Access · Scholarly Articles · Research · Academic · Library · DOI · Science
 
-## Scope
+## Unpaywall on APIs.io
 
-- **Type:** Index
+Everything profiled for Unpaywall is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/unpaywall/](https://apis.io/providers/unpaywall/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (2)
 
-- Open Access
-- Scholarly Articles
-- Research
-- Academic
-- Libraries
-- DOI
-- Science
+- [Unpaywall DOI Lookup API](https://apis.io/apis/unpaywall/unpaywall-doi-lookup-api/) — Look up open access status by DOI
+- [Unpaywall Search API](https://apis.io/apis/unpaywall/unpaywall-search-api/) — Search articles by title
 
-## Timestamps
+### Published properties
 
-- **Created:** 2025-02-06
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### Unpaywall API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-Free REST API providing open access status and full-text links for 120M+ scholarly articles. Look up any article by DOI to get its OA status, best open access location (publisher or repository), license, version, and all available free copies. Also supports title-based search across the full database. No API key required — just include your email address in requests. Rate limit: 100,000 calls per day.
+- [Unpaywall Agentic Access](https://apis.io/agentic-access/unpaywall/unpaywall-agentic-access/)
 
-- **Human URL:** [https://unpaywall.org/products/api](https://unpaywall.org/products/api)
-- **Base URL:** `https://api.unpaywall.org/v2`
+#### JSON Schema (1)
 
-#### Tags
+The data models the API reads and writes.
 
-- Open Access
-- DOI
-- Scholarly Articles
-- Search
+- [Unpaywall Article Object](https://apis.io/schemas/unpaywall/unpaywall-article/)
 
-#### Properties
+#### JSON Structure (1)
 
-- [Documentation](https://unpaywall.org/products/api)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/unpaywall/refs/heads/main/openapi/unpaywall-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Spectral Rules](https://raw.githubusercontent.com/api-evangelist/unpaywall/refs/heads/main/rules/unpaywall-rules.yml)
-- [JSON Schema](https://raw.githubusercontent.com/api-evangelist/unpaywall/refs/heads/main/json-schema/unpaywall-article-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [Postman Collection](collections/unpaywall.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/unpaywall.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Data models expressed in JSON Structure.
 
-## Common Properties
+- [Unpaywall Article Structure](https://apis.io/json-structure/unpaywall/unpaywall-article-structure/)
 
-- [GitHub Organization](https://github.com/ourresearch)
-- [LinkedIn](https://www.linkedin.com/company/impactstory)
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Unpaywall Context](https://apis.io/jsonld/unpaywall/unpaywall-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Unpaywall Vocabulary](https://apis.io/vocabularies/unpaywall/unpaywall-vocabulary/)
+
+#### Examples (2)
+
+Example requests and responses.
+
+- [Unpaywall Get Doi Example](https://apis.io/examples/unpaywall/unpaywall-get-doi-example/)
+- [Unpaywall Search Example](https://apis.io/examples/unpaywall/unpaywall-search-example/)
+
+#### Collections (3)
+
+Postman and Open Collection request collections.
+
+- [Unpaywall API](https://apis.io/collections/unpaywall/open-unpaywall/)
+- [Unpaywall DOI Lookup API](https://apis.io/collections/unpaywall/open-unpaywall-doi-lookup-api/)
+- [Unpaywall DOI Lookup Search API](https://apis.io/collections/unpaywall/open-unpaywall-search-api/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Unpaywall — jsonschema rules](https://apis.io/rules/unpaywall/unpaywall-jsonschema-spectral-rules/)
+- [Unpaywall API Rules](https://apis.io/rules/unpaywall/unpaywall-rules/)
+
+#### Security (1)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Unpaywall Domain Security](https://apis.io/security/unpaywall/unpaywall-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Unpaywall Plans Pricing](https://apis.io/plans/unpaywall/unpaywall-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Unpaywall Rate Limits](https://apis.io/rate-limits/unpaywall/unpaywall-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Unpaywall Finops](https://apis.io/finops/unpaywall/unpaywall-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://unpaywall.org)
 - [Documentation](https://unpaywall.org/products/api)
-- [Data Format](https://unpaywall.org/data-format)
 - [Support](https://support.unpaywall.org)
-- [Vocabulary](https://raw.githubusercontent.com/api-evangelist/unpaywall/refs/heads/main/vocabulary/unpaywall-vocabulary.yml)
-- [J S O N L D Context](https://raw.githubusercontent.com/api-evangelist/unpaywall/refs/heads/main/json-ld/unpaywall-context.jsonld)
-- [L L Ms Txt](https://unpaywall.org/llms.txt)
+- [GitHub](https://github.com/ourresearch)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 27.3** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 59.5 |
+| Contract governance | 27.3 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 0.0 |
+| Access clarity | 7.9 |
+
+**Agent readiness 30.3** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | na |
+| Error Semantics | verified |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 10.8** — Education & Research
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/unpaywall/](https://apis.io/providers/unpaywall/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Unpaywall: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/unpaywall/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
